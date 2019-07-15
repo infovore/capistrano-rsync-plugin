@@ -37,7 +37,9 @@ Per default, `:rsync_options` is set to exclude any git related files, thus none
 
 3. The current state of the remote cache directory is copied to the release directory (also using rsync, but as the release directory is freshly created for each deploy, this is in fact just a full recursive copy)
 
-## Configuration
+
+
+## Configuration
 
 Configuration option `:rsync_options` lets you specify options for the RSync command. The default is equivalent to:
 
@@ -93,6 +95,7 @@ namespace :mysite do
       end
     end
   end
+end
 ```
 
 This will change directory to the local cache, run `yarn`, and then run `hugo`. Now, we should add a hook to the `deploy.rb` to ensure this runs at the appropriate point in the build - after we've checked out the local cache:
