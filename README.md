@@ -9,7 +9,7 @@ This emerged after [capistrano-rsync-bladrak](https://github.com/Bladrak/capistr
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'capistrano-rsync-plugin'
+gem 'capistrano-rsync-plugin', '~> 0.2.0'
 ```
 
 And then execute:
