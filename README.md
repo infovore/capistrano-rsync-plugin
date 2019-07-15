@@ -1,13 +1,15 @@
-# Capistrano 3.7+ rsync plugin
+# Capistrano 3.7.1+ rsync plugin
 
-A plugin for Capistrano 3.7+ to enable deployment with RSync. Entirely adapted from [a gist by Stefan Daschek](https://gist.github.com/noniq/f73e7eb199a4c2ad519c6b5e2ba5b0df).
+A plugin for Capistrano 3.7.1+ to enable deployment with RSync. Entirely adapted from [a gist by Stefan Daschek](https://gist.github.com/noniq/f73e7eb199a4c2ad519c6b5e2ba5b0df).
+
+This emerged after [capistrano-rsync-bladrak](https://github.com/Bladrak/capistrano-rsync) appeared to [no longer support Capistrano 3.7.1](https://github.com/Bladrak/capistrano-rsync/issues/26)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'capistrano-rsync'
+gem 'capistrano-rsync-plugin'
 ```
 
 And then execute:
@@ -16,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install capistrano-rsync
+    $ gem install capistrano-rsync-plugin
 
 Then, add this to your `Capfile` after loading `capistrano/deploy`
 

@@ -3,14 +3,16 @@ lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "capistrano-rsync"
+  spec.name          = "capistrano-rsync-plugin"
   spec.version       = "0.2.0"
   spec.authors       = ["Tom Armitage", "Stefan Daschek"]
   spec.email         = ["tom@infovore.org"]
 
   spec.summary       = %q{Plugin for Capitsrano 3.7+ to deploy with rsync}
-  spec.description   = %q{Plugin for Capistrano 3.7+ to deploy with rsync, based on a Gist by Stefan Daschek}
-  spec.homepage      = "https://github.com/infovore/capistrano-rsync"
+  spec.description   = %q{Plugin for Capistrano 3.7+ to deploy with rsync, based on a Gist by Stefan Daschek.
+
+  Ideally suited to deploying static sites made with static-site-generators.}
+  spec.homepage      = "https://github.com/infovore/capistrano-rsync-plugin"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -19,7 +21,7 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "https://github.com/infovore/capistrano-rsync"
+    spec.metadata["source_code_uri"] = "https://github.com/infovore/capistrano-rsync-plugin"
     # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
