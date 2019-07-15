@@ -5,7 +5,7 @@ require "capistrano/rsync/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-rsync"
-  spec.version       = Capistrano::Rsync::VERSION
+  spec.version       = "0.1.1"
   spec.authors       = ["Tom Armitage", "Stefan Daschek"]
   spec.email         = ["tom@infovore.org"]
 
