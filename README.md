@@ -1,6 +1,6 @@
-# Capistrano::Rsync
+# Capistrano 3.7+ rsync plugin
 
-A plugin for Capistrano 3.7+ to enable deployment with RSync. Entirely adapted from [a gist by Stefan Daschek](https://gist.github.com/noniq/f73e7eb199a4c2ad519c6b5e2ba5b0df)
+A plugin for Capistrano 3.7+ to enable deployment with RSync. Entirely adapted from [a gist by Stefan Daschek](https://gist.github.com/noniq/f73e7eb199a4c2ad519c6b5e2ba5b0df).
 
 ## Installation
 
@@ -18,10 +18,12 @@ Or install it yourself as:
 
     $ gem install capistrano-rsync
 
-Then, add this to your `Capfile`:
+Then, add this to your `Capfile` after loading `capistrano/deploy`
 
-    require "capistrano/rsync"
-    install_plugin Capistrano::SCM::Rsync
+```ruby
+require "capistrano/rsync"
+install_plugin Capistrano::SCM::Rsync
+```
 
 ## Usage
 
@@ -39,19 +41,27 @@ Per default, `:rsync_options` is set to exclude any git related files, thus none
 
 Configuration option `:rsync_options` lets you specify options for the RSync command. The default is equivalent to:
 
-    set :rsync_options, %w[--archive --delete --exclude=.git*]
+```ruby
+set :rsync_options, %w[--archive --delete --exclude=.git*]
+```
 
 The local cache directory relative to current is set by `:rsync_local_cache`. The default is equivalent to 
 
-    set :rsync_local_cache, 'tmp/.capistrano-rsync-deploy'
+```ruby
+set :rsync_local_cache, 'tmp/.capistrano-rsync-deploy'
+```
 
 The remote cache directory, relative to the deploy root, is set via `:rsync_remote_cache`, and is equivalent to:
 
-    set :rsync_remote_cache, 'rsync-deploy'
+```ruby
+set :rsync_remote_cache, 'rsync-deploy'
+```
 
 The option `:rsync_deploy_build_path` makes it possible to deploy a subdirectory of the local cache. For instance, to only deploy the `public` directory, containing a compiled static site:
 
-    set :rsync_deploy_build_path, 'public/'
+```ruby
+set :rsync_deploy_build_path, 'public/'
+```
 
 Note the trailing slash. By default this is blank.
 
