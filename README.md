@@ -80,9 +80,9 @@ The `rsync` plugin introduces the following new tasks, which can be hooked onto 
 
 After `create_release`, the traditional Capistrano flow is resumed, and the latest release is symlinekd to current.
 
-## Hooking build tasks on to capistrano-rsync
+## Hooking build tasks on to capistrano-rsync-plugin
 
-A primary use case for `capistrano-rsync` is the deployment of sites made with static site generators. Rather than storing compiled static sites in the repo along with sourcecode, it is recommended to build the site as part of the deployment process, and then deploy only the compiled site. This requires no dependencies on the server as a result.
+A primary use case for `capistrano-rsync-plugin` is the deployment of sites made with static site generators. Rather than storing compiled static sites in the repo along with sourcecode, it is recommended to build the site as part of the deployment process, and then deploy only the compiled site. This requires no dependencies on the server as a result.
 
 As an example, let's deploy a repository made with the static site generator [Hugo](https://gohugo.io). We'll first add a task in our `deploy.rb` to build the site by installing necessary Javascript plugins, and then running Hugo:
 
@@ -118,7 +118,7 @@ Of course, you can always override these variables and tasks in per-environment 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/infovore/capistrano-rsync.
+Bug reports and pull requests are welcome on GitHub at https://github.com/infovore/capistrano-rsync-plugin .
 
 ## License
 
