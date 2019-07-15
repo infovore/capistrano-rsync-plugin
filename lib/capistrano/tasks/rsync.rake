@@ -1,28 +1,13 @@
 namespace :rsync do
   desc <<-DESC
-      Copy application source code from (remote) cache to release path.
-
-      If a :rsync_deploy_build_path is set, only that relative path will \
-      be copied to the release path.
-  DESC
-  task create_release: :update_remote_cache do
-    on release_roles :all do
-      execute :rsync, '--archive', "#{fetch(:deploy_to)}/#{fetch(:rsync_remote_cache)}/#{fetch(:rsync_deploy_build_path)}", "#{release_path}/"
-    end
-  end
-
-  desc <<-DESC
-      Update remote cache of application source code.
+      Determine version of code that rsync will deploy. 
       
-      This will be rsynced to :rsync_remote_cache, using rsync options set in \
-      :rsync_options
+      By default, this is the latest version of the code on branch :branch.
   DESC
-  task update_remote_cache: :update_local_cache do
-    on release_roles :all do |role|
-      host_spec = role.hostname
-      host_spec = "#{role.user}@#{host_spec}" if role.user
-      run_locally do
-        execute :rsync, *fetch(:rsync_options), "#{fetch(:rsync_local_cache)}/", "#{host_spec}:#{fetch(:deploy_to)}/#{fetch(:rsync_remote_cache)}/"
+  task :set_current_revision do
+    run_locally do
+      within fetch(:rsync_local_cache) do
+        set :current_revision, capture(:git, "rev-list --max-count=1 #{fetch(:branch)}")
       end
     end
   end
@@ -47,15 +32,30 @@ namespace :rsync do
   end
 
   desc <<-DESC
-      Determine version of code that rsync will deploy. 
+      Update remote cache of application source code.
       
-      By default, this is the latest version of the code on branch :branch.
+      This will be rsynced to :rsync_remote_cache, using rsync options set in \
+      :rsync_options
   DESC
-  task :set_current_revision do
-    run_locally do
-      within fetch(:rsync_local_cache) do
-        set :current_revision, capture(:git, "rev-list --max-count=1 #{fetch(:branch)}")
+  task update_remote_cache: :update_local_cache do
+    on release_roles :all do |role|
+      host_spec = role.hostname
+      host_spec = "#{role.user}@#{host_spec}" if role.user
+      run_locally do
+        execute :rsync, *fetch(:rsync_options), "#{fetch(:rsync_local_cache)}/", "#{host_spec}:#{fetch(:deploy_to)}/#{fetch(:rsync_remote_cache)}/"
       end
+    end
+  end
+
+  desc <<-DESC
+      Copy application source code from (remote) cache to release path.
+
+      If a :rsync_deploy_build_path is set, only that relative path will \
+      be copied to the release path.
+  DESC
+  task create_release: :update_remote_cache do
+    on release_roles :all do
+      execute :rsync, '--archive', "#{fetch(:deploy_to)}/#{fetch(:rsync_remote_cache)}/#{fetch(:rsync_deploy_build_path)}", "#{release_path}/"
     end
   end
 

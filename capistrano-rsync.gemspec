@@ -1,11 +1,10 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "capistrano/rsync/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-rsync"
-  spec.version       = "0.1.1"
+  spec.version       = "0.1.2"
   spec.authors       = ["Tom Armitage", "Stefan Daschek"]
   spec.email         = ["tom@infovore.org"]
 
