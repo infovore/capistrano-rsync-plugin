@@ -35,7 +35,7 @@ Deploying via rsync works in three steps:
 
 2. The local cache directory is synced to the remote cache directory (`:rsync_remote_cache`) using rsync. Think of the remote cache directory as equivalent to the `repo` directory when deploying via git. It is there to avoid having to transfer all the files on each deploy. This, too, can be deleted (and will be recreated during the next deploy).
 
-Per default, `:rsync_options` is set to exclude any git related files, thus none of these files will be transferred to the server.
+    By default, `:rsync_options` is set to exclude any git related files, thus none of these files will be transferred to the server.
 
 3. The current state of the remote cache directory is copied to the release directory (also using rsync, but as the release directory is freshly created for each deploy, this is in fact just a full recursive copy)
 
