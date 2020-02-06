@@ -12,6 +12,9 @@ class Capistrano::SCM
       # Remote cache on the server. Will be synced with the local cache before each release, and then used as
       # source for the release. Saves needing to transfer all the source files for each release.
       set_if_empty :rsync_remote_cache, 'rsync-deploy'
+
+      # Git fetch automaticly submodules
+      set_if_empty :rsync_git_submodules, true
     end
 
     def define_tasks
@@ -53,12 +56,14 @@ class Capistrano::SCM
           run_locally do
             unless File.exist?("#{fetch(:rsync_local_cache)}/.git")
               FileUtils.mkdir_p(fetch(:rsync_local_cache))
-              execute :git, :clone, '--quiet', repo_url, fetch(:rsync_local_cache)
+              recursive_submodules = fetch(:rsync_git_submodules) ? '--recurse-submodules' : ''
+              execute :git, :clone, recursive_submodules, '--quiet', repo_url, fetch(:rsync_local_cache)
             end
             within fetch(:rsync_local_cache) do
               execute :git, :fetch, '--quiet', '--all', '--prune'
               execute :git, :checkout, fetch(:branch)
               execute :git, :reset, '--quiet', '--hard', "origin/#{fetch(:branch)}"
+              execute :git, :submodule, :update, '--recursive', '--init' if fetch(:rsync_git_submodules)
             end
           end
         end
