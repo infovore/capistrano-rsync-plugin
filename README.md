@@ -67,6 +67,12 @@ The option `:rsync_deploy_build_path` makes it possible to deploy a subdirectory
 set :rsync_deploy_build_path, 'public/'
 ```
 
+The option `:rsync_git_submodules` enables git to use submodules. If enabled it uses the submodule version with is specified in main git repository.
+
+```ruby
+set :rsync_git_submodules, true
+```
+
 Note the trailing slash. By default this is blank.
 
 ### New Capistrano Tasks
